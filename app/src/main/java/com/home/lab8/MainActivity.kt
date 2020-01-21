@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: ContactAdapter
     private val contacts = ArrayList<Contact>()
-    val addContact = 1
+    val addContactRequest = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         adapter = ContactAdapter(contacts)
         recyclerView.adapter = adapter
         btn_add.setOnClickListener {
-            startActivityForResult(Intent(this, AddActivity::class.java), addContact)
+            startActivityForResult(Intent(this, AddActivity::class.java), addContactRequest)
         }
     }
 
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         data?.extras?.let {
-            if(requestCode == addContact && resultCode == Activity.RESULT_OK) {
+            if(requestCode == addContactRequest && resultCode == Activity.RESULT_OK) {
                 contacts.add(Contact(it.getString("name").toString(), it.getString("phone").toString()))
                 adapter.notifyDataSetChanged()
             }
